@@ -11,7 +11,7 @@
 
 	<div id="target-text">
 		<span id="target-lang"></span>
-		<div class="text-container editable" contenteditable="true">
+		<div class="text-container editable">
 		</div>
 	</div>
 </section>
@@ -19,7 +19,7 @@
 
 <script type="text/template" id="text-template">	
 	<% _.each(segments, function (el) { %>
-		<span class="text-wrapper <%= el.id %>"><%= el.segment %></span>
+		<p class="text-wrapper <%= el.id %>" contenteditable="<%= el.isTarget ? true : false %>"><%= el.segment %></p>
 	<% }); %>
 </script>
 

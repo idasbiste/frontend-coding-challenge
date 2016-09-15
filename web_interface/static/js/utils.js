@@ -1,3 +1,5 @@
+/* global _ */
+
 function Utils() {
 	
 	this.getTextSegments = function (data) {
@@ -7,11 +9,12 @@ function Utils() {
 		_.each(data, function (el) {
 
 			var i = 0,
-				markupTemp = el.annotations.markup
+				markupTemp = el.annotations.markup,
 				textProperty = !!el.template ? "template" : "text";
 
 			while (i < markupTemp.length) {
-				complexSeg = {};
+				var complexSeg = {};
+				complexSeg.isTarget = !!el.template;
 				complexSeg.text = el.template || el.text;
 				complexSeg.glossary = el.annotations.glossary;
 				complexSeg.id = el.id + '-' + i;

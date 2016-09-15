@@ -59,6 +59,7 @@
 				if (wrapperHoveredClass)
 				{
 					$("." + wrapperHoveredClass).removeClass("hovered");
+					$("." + wrapperClickedClass).eq(1).removeClass("clicked");
 				}
 			});
 
