@@ -1,0 +1,59 @@
+body
+{
+	background-color: grey;
+}
+
+.center-vertical {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+section {
+    width: 80%;
+    background: aqua;
+    margin: auto;
+    padding: 10px;
+}
+
+#source-text
+{
+	width: 50%;
+    height: 300px;
+    float: left;
+}
+
+#target-text
+{
+	margin-left: 50%;
+    height: 300px;
+}
+
+#source-text, #target-text
+{
+	background-color: white;
+}
+
+#source-lang, #target-lang
+{
+	display: inline-block;
+	margin-top: 5px;
+	margin-bottom: 10px;
+}
+
+.editable .text-wrapper:hover
+{
+	background-color: yellow;
+}
+
+.text-wrapper.clicked
+{
+	background-color: purple;
+	opacity: 0.7;
+}
+
+.text-wrapper.hovered
+{
+	background-color: cyan;
+	opacity: 0.5;
+}
