@@ -44,12 +44,12 @@ section {
 .editable .text-wrapper:hover
 {
 	background-color: yellow;
+	opacity: 1;
 }
 
 .text-wrapper.clicked
 {
-	background-color: purple;
-	opacity: 0.7;
+	background-color: rgba(195, 144, 212, 0.6);
 }
 
 .text-wrapper.hovered

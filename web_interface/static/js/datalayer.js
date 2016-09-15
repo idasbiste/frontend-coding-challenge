@@ -1,19 +1,19 @@
 function DataLayer() {
 
-	this.restPost = function (url, successCB, errorCB, data) {
+	this.restPost = function (url, crossDomain, data) {
 
-		$.ajax({
+		return $.ajax({
 			url: url,
 			method: "POST",
 			dataType: "json",
+			contentType: "application/json; charset=utf-8",
 			data: JSON.stringify(data),
-			success: successCB,
-			error: errorCB
+			crossDomain: crossDomain
 		});
 
 	};
 
-	this.restGet = function (url, successCB, errorCB) {
+	this.restGet = function (url) {
 
 		return $.ajax({
 			url: url,
