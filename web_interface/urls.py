@@ -20,4 +20,6 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
 
     url(r'^api/v1/', include('apps.task.urls', namespace='task')),
+
+	url(r'^templateView/', include('apps.challenge.urls', namespace = 'challenge')),
 ]
