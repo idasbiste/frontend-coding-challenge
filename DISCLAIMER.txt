@@ -10,4 +10,8 @@ DISCLAIMER
 	- Bootstrap (?)
 
 - Refactor:
-	- Backbone to play with the view
+	- Backbone to play with the template view
+
+- Settings JSON file:
+	- Timeout to input keypress
+	- Endpoints
