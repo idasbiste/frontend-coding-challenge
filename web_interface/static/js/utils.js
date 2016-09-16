@@ -1,4 +1,4 @@
-/* global _ */
+/* global _, DataLayer */
 
 function Utils() {
 	
@@ -45,7 +45,7 @@ function Utils() {
 		_.each(nuggets, function (nug) {
 			_.each(nug.segments, function (seg) {
 				segments.push(seg.text);
-			})
+			});
 		});
 
 		return segments;
@@ -80,9 +80,9 @@ function Utils() {
 
 				element.html(content.replace(term, "<span class='glossary-term-wrapper' contenteditable='false'>" + term + "</span>"));
 
-			})
+			});
 
-		})
+		});
 
 	};
 
@@ -103,10 +103,12 @@ function Utils() {
 			trg_lang: data.trg_lang,
 			fast_analysis: true
 		});
+		
 	};
 
-
-	// It delays the keypress event to send a POST request to get text issues
+	
+	// It delays the a callback function by ms
+	// Used to delay the keyup event to send the POST request and get issues information
 	this.delayInput = (function () {
 		var timer = 0;
 		return function (callback, ms) {

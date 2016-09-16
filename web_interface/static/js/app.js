@@ -1,3 +1,5 @@
+/* global Utils, TemplateView, _ */
+
 (function () {
 
 	var utils = new Utils();

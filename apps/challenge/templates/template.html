@@ -1,8 +1,12 @@
 {% load static %}
 
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="{% static 'css/app.css' %}">
 
-<section id="container" class="center-vertical">
+<header>
+	<img src="{% static 'img/logo_topo.png' %}"></img>
+</header>
+<section id="container">
 	<div id="source-text">
 		<span id="source-lang"></span>
 		<div class="text-container">
@@ -14,7 +18,12 @@
 		<div class="text-container editable" spellcheck="false">
 		</div>
 	</div>
+	
+	<div id="popup-wrapper" class="hidden"></div>
 </section>
+<footer>
+	<button id="submit">Submit</button>
+</footer>
 
 
 <!-- Nugget template -->
@@ -29,7 +38,7 @@
 
 <!-- Language template -->
 <script type="text/template" id="lang-template">
-	<%= language.name %>
+	<%= language.name %> - <%= category %>
 </script>
 
 

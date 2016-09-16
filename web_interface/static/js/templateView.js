@@ -1,3 +1,5 @@
+/* global Utils, $, _, */
+
 function TemplateView(serverData) {
 	
 	var utils = new Utils(),
@@ -21,8 +23,8 @@ function TemplateView(serverData) {
 			throw new Error("Different number of source and target segments");
 		}
 
-		this.fillTemplate(lang_tpl, $("#source-lang"), { language: serverData.source_language });
-		this.fillTemplate(lang_tpl, $("#target-lang"), { language: serverData.target_language });
+		this.fillTemplate(lang_tpl, $("#source-lang"), { language: serverData.source_language, category: 'Original' });
+		this.fillTemplate(lang_tpl, $("#target-lang"), { language: serverData.target_language, category: 'Translation' });
 
 		this.fillTemplate(text_tpl, $("#source-text .text-container"), { nuggets: this.src });
 		this.fillTemplate(text_tpl, $("#target-text .text-container"), { nuggets: this.trg });
@@ -38,7 +40,7 @@ function TemplateView(serverData) {
 			trg: this.trg,
 			src_lang: serverData.source_language,
 			trg_lang: serverData.target_language
-		}
+		};
 
 	};
 
@@ -77,12 +79,12 @@ function TemplateView(serverData) {
 			e.stopPropagation();
 		});
 
-		$(".word-error-wrapper").on('click', function () {
+		$(".word-error-wrapper").on('click', function (e) {
 
-			view.showErrorPopup();
+			view.toggleErrorPopup();
 			e.stopPropagation();
 
-		})
+		});
 
 		$("#container").on('click', function () {
 			if (view.wrapperClickedClass)
@@ -111,7 +113,7 @@ function TemplateView(serverData) {
 			}
 
 			e.stopPropagation();
-		})
+		});
 
 	};
 
@@ -176,18 +178,31 @@ function TemplateView(serverData) {
 		{
 			_.each(issues.sentence_issues['spelling'], function (spellingIssues) {
 				var innerHTML = $(element).html();
-				$(element).html(innerHTML.replace(spellingIssues.errors, "<span class='word-error-wrapper'>" + spellingIssues.errors + "</span>"))
-			})
+				$(element).html(innerHTML.replace(spellingIssues.errors, "<span class='word-error-wrapper'>" + spellingIssues.errors + "</span>"));
+				view.setUpErrorPopup({
+					category: {
+						name: "Spelling",
+						description: spellingIssues.description
+					},
+					suggestions: spellingIssues.suggestions
+				});
+			});
 		}
 		
 		// Continue if statements for more unknown types
-		/*
-		if (issues.sentence_issues['consistency'])
-		{
-	
-		}
-		*/
 
+	};
+
+	this.setUpErrorPopup = function (data) {
+		
+		this.fillTemplate($("#error-popup-template"), $("#popup-wrapper"), data);
+			
+	};
+
+	this.toggleErrorPopup = function () {
+	
+		$("#popup-wrapper").toggleClass('hidden');
+		
 	};
 
 }
