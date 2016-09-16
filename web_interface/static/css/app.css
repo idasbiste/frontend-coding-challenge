@@ -1,3 +1,10 @@
+body, section, div, p
+{
+	margin: 0;
+	border: 0;
+	font-size: 100%;
+}
+
 body
 {
 	background-color: grey;
@@ -71,5 +78,6 @@ p
 
 .word-error-wrapper
 {
-	border-bottom: 2px red dashed;
+	border-bottom: 1px red dashed;
+	cursor: pointer;
 }

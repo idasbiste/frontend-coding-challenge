@@ -61,6 +61,13 @@ function Utils() {
 	};
 
 
+	this.tagCleaner = function (tag, html, text) {
+
+		var innerText = html.match(new RegExp("<" + tag + ".*>(.*?)</" + tag + ">", "g"))[0];
+		return html.replace(innerText, text);
+
+	};
+
 	// Set the correct markup for the glossary items - uneditable content
 	this.setGlossaryTerms = function (element, nuggets) {
 
@@ -96,12 +103,6 @@ function Utils() {
 			trg_lang: data.trg_lang,
 			fast_analysis: true
 		});
-	};
-
-	this.smartCheckIssues = function (data) {
-
-		
-		
 	};
 
 
