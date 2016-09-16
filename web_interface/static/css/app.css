@@ -63,3 +63,13 @@ p
 	background-color: cyan;
 	opacity: 0.5;
 }
+
+.glossary-term-wrapper
+{
+	background-color: rgba(150, 150, 150, 0.4);
+}
+
+.word-error-wrapper
+{
+	border-bottom: 2px red dashed;
+}

@@ -11,20 +11,39 @@
 
 	<div id="target-text">
 		<span id="target-lang"></span>
-		<div class="text-container editable">
+		<div class="text-container editable" spellcheck="false">
 		</div>
 	</div>
 </section>
 
-
+<!-- Nugget template -->
 <script type="text/template" id="text-template">	
-	<% _.each(segments, function (el) { %>
-		<p class="text-wrapper <%= el.id %>" contenteditable="<%= el.isTarget ? true : false %>"><%= el.segment %></p>
+	<% _.each(nuggets, function (el) { %>
+		<% _.each(el.segments, function (segment) { %>
+			<p class="text-wrapper <%= segment.id %>" contenteditable="<%= el.isTarget ? true : false %>"><%= segment.text %></p>
+		<% }); %>
 	<% }); %>
 </script>
 
+<!-- Language template -->
 <script type="text/template" id="lang-template">
 	<%= language.name %>
+</script>
+
+<!-- Error popup -->
+<script type="text/template" id="error-popup-template">
+	<div id="error-popup">
+		<div class="arrow-up"></div>
+		<div class="error-type">
+			<p class="error-type-name"><%= category.name %></p>
+			<p class="error-type-description"><%= category.description %></p>
+		</div>
+		<ul class="category-suggestions">
+			<% _.each(suggestions, function (suggestion) { %>
+				<li><%= suggestion %></li>
+			<% }); %>
+		</ul>
+	</div>
 </script>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js"></script>
