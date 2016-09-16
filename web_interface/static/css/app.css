@@ -16,6 +16,12 @@ section {
     padding: 10px;
 }
 
+p 
+{
+	-webkit-margin-before: 6px;
+	-webkit-margin-after: 6px;
+}
+
 #source-text
 {
 	width: 50%;
