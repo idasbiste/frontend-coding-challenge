@@ -1,0 +1,13 @@
+DISCLAIMER
+
+- Put each template in a single HTML file and have a loader on utils.js
+- Models:
+	- Nugget
+	- Segment
+
+- Styling:
+	- Add instructions column?
+	- Bootstrap (?)
+
+- Refactor:
+	- Backbone to play with the view
