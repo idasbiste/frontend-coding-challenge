@@ -9,6 +9,7 @@ function TemplateView(serverData) {
 	this.lastHoveredElement = null;
 	this.wrapperClickedClass = null;
 	this.wrapperHoveredClass = null;
+	this.spellingErrors = [];
 
 	this.build = function () {
 
@@ -81,7 +82,7 @@ function TemplateView(serverData) {
 
 		$(".text-wrapper").on('click', ".word-error-wrapper", function (e) {
 
-			view.toggleErrorPopup();
+			view.setUpErrorPopup(e, _.find(view.spellingErrors, { error: $(this).html() }));
 			e.stopPropagation();
 
 		});
@@ -179,11 +180,12 @@ function TemplateView(serverData) {
 			_.each(issues.sentence_issues['spelling'], function (spellingIssues) {
 				var innerHTML = $(element).html();
 				$(element).html(innerHTML.replace(spellingIssues.errors, "<span class='word-error-wrapper'>" + spellingIssues.errors + "</span>"));
-				view.setUpErrorPopup({
+				view.spellingErrors.push({
 					category: {
 						name: "Spelling",
 						description: spellingIssues.description
 					},
+					error: spellingIssues.errors,
 					suggestions: spellingIssues.suggestions
 				});
 			});
@@ -193,16 +195,12 @@ function TemplateView(serverData) {
 
 	};
 
-	this.setUpErrorPopup = function (data) {
+	this.setUpErrorPopup = function (e, data) {
 		
 		this.fillTemplate($("#error-popup-template"), $("#popup-wrapper"), data);
+		$("#popup-wrapper").css("left", (e.clientX - $("#popup-wrapper").width() / 2) + "px");
+		$("#popup-wrapper").css("top", (e.clientY + 25) + "px");
 			
-	};
-
-	this.toggleErrorPopup = function () {
-	
-		$("#popup-wrapper").toggleClass('hidden');
-		
 	};
 
 }
