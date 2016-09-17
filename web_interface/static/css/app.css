@@ -8,7 +8,7 @@ body, header, section, div, p, footer
 
 body
 {
-	background-color: rgb(230, 230, 230);
+	background-color: #e8ecef;
 }
 
 header
@@ -117,17 +117,6 @@ footer
 	cursor: pointer;
 }
 
-.category-suggestions li 
-{
-	cursor: pointer;
-	list-style-type: none;
-}
-
-#ignore-suggestion
-{
-	color: blue;
-}
-
 #submit
 {
     float: right;
@@ -139,4 +128,66 @@ footer
     color: #fff;
     line-height: 32px;
     text-align: center;
+}
+
+/* Error-popup-wrapper */
+#popup-wrapper
+{
+	font-size: 80%;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    position: absolute;
+    min-width: 200px;
+    max-width: 280px;
+}
+
+#popup-wrapper .arrow-up
+{
+	width: 0;
+	height: 0;
+	position: absolute;
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-bottom: 10px solid #e8ecef;
+	top: -10px;
+    transform: translateX(-50%);
+    left: 50%;
+}
+
+.error-type 
+{
+    padding: 10px;
+    background-color: #e8ecef;
+    border-radius: 3px;
+}
+
+.error-type-name
+{
+	font-weight: bold;
+    font-size: 16px;
+}
+
+.error-type-descriptiopn
+{
+	font-size: 12px;
+}
+
+.category-suggestions
+{
+	margin: 0;
+	padding: 0;
+	color: #949496;
+	background-color: #f8f8f8;
+}
+
+.category-suggestions li 
+{
+	cursor: pointer;
+	list-style-type: none;
+	border-top: 1px solid #e8ecef;
+    padding: 5px 10px;
+}
+
+#ignore-suggestion
+{
+	color: blue;
 }
