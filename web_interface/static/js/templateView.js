@@ -77,6 +77,7 @@ function TemplateView(serverData) {
 			$("." + view.wrapperHoveredClass).eq(0).removeClass("hovered");
 			$("." + view.wrapperClickedClass).addClass("clicked");
 
+			view.cleanPopup();
 			e.stopPropagation();
 		});
 
@@ -92,6 +93,12 @@ function TemplateView(serverData) {
 			{
 				$("." + view.wrapperClickedClass).removeClass("clicked");
 			}
+			
+			view.cleanPopup();
+		});
+		
+		$("body").on('click', function () {
+			view.cleanPopup();
 		});
 
 	};
@@ -195,6 +202,7 @@ function TemplateView(serverData) {
 
 	};
 
+
 	this.setUpErrorPopup = function (e, data) {
 		
 		this.fillTemplate($("#error-popup-template"), $("#popup-wrapper"), data);
@@ -203,6 +211,15 @@ function TemplateView(serverData) {
 			
 	};
 
+
+	this.cleanPopup = function () {
+		
+		if ($("#popup-wrapper").html() != "") 
+		{
+			$("#popup-wrapper").empty();
+		}
+		
+	};
 }
 
 /* 
