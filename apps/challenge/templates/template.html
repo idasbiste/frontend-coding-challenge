@@ -18,9 +18,8 @@
 		<div class="text-container editable" spellcheck="false">
 		</div>
 	</div>
-	
-	<div id="popup-wrapper" class="hidden"></div>
 </section>
+<div id="popup-wrapper"></div>
 <footer>
 	<button id="submit">Submit</button>
 </footer>
@@ -49,19 +48,17 @@
 
 <!-- Error popup -->
 <script type="text/template" id="error-popup-template">
-	<div id="error-popup">
-		<div class="arrow-up"></div>
-		<div class="error-type">
-			<p class="error-type-name"><%= category.name %></p>
-			<p class="error-type-description"><%= category.description %></p>
-		</div>
-		<ul class="category-suggestions">
-			<% _.each(suggestions, function (suggestion) { %>
-				<li><%= suggestion %></li>
-			<% }); %>
-			<li id="ignore-suggestion">Ignore</li>
-		</ul>
+	<div class="arrow-up"></div>
+	<div class="error-type">
+		<p class="error-type-name"><%= category.name %></p>
+		<p class="error-type-description"><%= category.description %></p>
 	</div>
+	<ul class="category-suggestions">
+		<% _.each(suggestions, function (suggestion) { %>
+			<li><%= suggestion %></li>
+		<% }); %>
+		<li id="ignore-suggestion">Ignore</li>
+	</ul>
 </script>
 
 
