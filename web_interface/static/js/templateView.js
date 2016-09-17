@@ -79,7 +79,7 @@ function TemplateView(serverData) {
 			e.stopPropagation();
 		});
 
-		$(".word-error-wrapper").on('click', function (e) {
+		$(".text-wrapper").on('click', ".word-error-wrapper", function (e) {
 
 			view.toggleErrorPopup();
 			e.stopPropagation();
