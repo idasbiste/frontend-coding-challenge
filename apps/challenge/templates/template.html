@@ -26,6 +26,11 @@
 </footer>
 
 
+<!-- Loader template -->
+<script type="text/template" id="loader-template">
+	<img id="loader-img" src="{% static 'img/loader.gif' %}" />
+</script>
+
 <!-- Nugget template -->
 <script type="text/template" id="text-template">	
 	<% _.each(nuggets, function (el) { %>
@@ -64,4 +69,5 @@
 <script type="text/javascript" src='{% static "js/datalayer.js" %}'></script>
 <script type="text/javascript" src='{% static "js/utils.js" %}'></script>
 <script type="text/javascript" src='{% static "js/templateView.js" %}'></script>
+<script type="text/javascript" src='{% static "js/loaderView.js" %}'></script>
 <script type="text/javascript" src='{% static "js/app.js" %}'></script>

@@ -1,8 +1,11 @@
-/* global Utils, TemplateView, _ */
+/* global Utils, TemplateView, LoaderView, _ */
 
 (function () {
 
-	var utils = new Utils();
+	var utils = new Utils(),
+		loader = new LoaderView();
+	
+	loader.start();
 	
 	utils.getData()
 	.then(function (data) {
@@ -11,6 +14,9 @@
 	})
 	.then(function (data) {
 		utils.smartCheckData(data)
+		.then(function () {
+			loader.stop();
+		})
 		.fail(function () {
 			throw new Error("Error on SmartCheck first POST");
 		});
