@@ -1,12 +1,11 @@
 /* global Utils, TemplateView, LoaderView, _ */
 
-var CONFIGS = null;
+var CONFIGS = null,
+	utils = new Utils(),
+	loader = new LoaderView();
 
 (function () {
 
-	var utils = new Utils(),
-		loader = new LoaderView();
-	
 	loader.start();
 	
 	utils.getConfig("/static/config.json")

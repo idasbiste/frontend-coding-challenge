@@ -25,43 +25,6 @@
 </footer>
 
 
-<!-- Loader template -->
-<script type="text/template" id="loader-template">
-	<img id="loader-img" src="{% static 'img/loader.gif' %}" />
-</script>
-
-<!-- Nugget template -->
-<script type="text/template" id="text-template">	
-	<% _.each(nuggets, function (el) { %>
-		<% _.each(el.segments, function (segment) { %>
-			<p class="text-wrapper <%= segment.id %>" contenteditable="<%= el.isTarget ? true : false %>"><%= segment.text %></p>
-		<% }); %>
-	<% }); %>
-</script>
-
-
-<!-- Language template -->
-<script type="text/template" id="lang-template">
-	<%= language.name %> - <%= category %>
-</script>
-
-
-<!-- Error popup -->
-<script type="text/template" id="error-popup-template">
-	<div class="arrow-up"></div>
-	<div class="error-type">
-		<p class="error-type-name"><%= category.name %></p>
-		<p class="error-type-description"><%= category.description %></p>
-	</div>
-	<ul class="category-suggestions">
-		<% _.each(suggestions, function (suggestion) { %>
-			<li><%= suggestion %></li>
-		<% }); %>
-		<li id="ignore-suggestion">Ignore</li>
-	</ul>
-</script>
-
-
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js"></script>
 <script type="text/javascript" src='{% static "js/libs/jquery-3.1.0.min.js" %}'></script>
 <script type="text/javascript" src='{% static "js/utils/datalayer.js" %}'></script>

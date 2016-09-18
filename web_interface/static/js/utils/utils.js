@@ -8,6 +8,16 @@ function Utils() {
 		return dataLayer.restGet(location);
 	};
 
+	
+	// Get task data
+	this.getData = function () {
+		return dataLayer.restGet(CONFIGS["mock-data-endpoint"]);
+	};
+
+
+	this.getHTMLTemplate = function (id) {
+		return dataLayer.localGet("/static/html/" + id + ".html");
+	};
 
 	this.getNuggets = function (data) {
 
@@ -84,12 +94,6 @@ function Utils() {
 				element.html(content.replace(term, "<span class='glossary-term-wrapper' contenteditable='false'>" + term + "</span>"));
 			});
 		});
-	};
-
-
-	// Get task data
-	this.getData = function () {
-		return dataLayer.restGet(CONFIGS["mock-data-endpoint"]);
 	};
 
 

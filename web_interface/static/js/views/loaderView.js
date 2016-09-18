@@ -1,13 +1,17 @@
-/* global $, _ */
+/* global $, _, utils */
 
 function LoaderView() {
     
+    var view = this;
+    
     this.el = "#loader-img";
     
-    this.template = _.template($("#loader-template").html());
-    
     this.start = function () {
-        $('body').prepend(this.template);
+        utils.getHTMLTemplate("loader-tpl")
+        .then(function (template) {
+            view.template = _.template(template);
+            $('body').prepend(view.template);  
+        })
     };
     
     this.stop = function () {

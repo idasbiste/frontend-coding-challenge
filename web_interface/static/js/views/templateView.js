@@ -17,26 +17,34 @@ function TemplateView(serverData) {
 		this.src = utils.getNuggets(serverData.source_segments),
 		this.trg = utils.getNuggets(serverData.target_segments);
 
-		var text_tpl = $("#text-template"),
-			lang_tpl = $("#lang-template");
+		var text_tpl = "text-tpl",
+			lang_tpl = "lang-tpl";
 
 		if (this.src.length != this.trg.length) 
 		{
 			throw new Error("Different number of source and target segments");
 		}
 
-		this.fillTemplate(lang_tpl, $("#source-lang"), { language: serverData.source_language, category: 'Original' });
-		this.fillTemplate(lang_tpl, $("#target-lang"), { language: serverData.target_language, category: 'Translation' });
-
-		this.fillTemplate(text_tpl, $("#source-text .text-container"), { nuggets: this.src });
-		this.fillTemplate(text_tpl, $("#target-text .text-container"), { nuggets: this.trg });
-
-		utils.removeHTMLWhiteSpace($("#source-text .text-container"));
-		utils.removeHTMLWhiteSpace($("#target-text .text-container"));
-		utils.setGlossaryTerms($("#target-text .text-container"), this.trg);
-
-		this.setEvents();
-
+		$.when.apply($, [this.fillTemplate(lang_tpl, $("#source-lang"), { language: serverData.source_language, category: 'Original' }),
+			this.fillTemplate(lang_tpl, $("#target-lang"), { language: serverData.target_language, category: 'Translation' }),
+			this.fillTemplate(text_tpl, $("#source-text .text-container"), { nuggets: this.src }),
+			this.fillTemplate(
+				text_tpl, 
+				$("#target-text .text-container"), 
+				{ 
+					nuggets: this.trg 
+				},
+				{
+					fn: utils.setGlossaryTerms,
+					args: [this.trg]
+				}
+			)]
+		)
+		.done(function () {
+			view.setEvents();
+		})
+		.fail();
+		
 		return {
 			src: this.src,
 			trg: this.trg,
@@ -47,9 +55,22 @@ function TemplateView(serverData) {
 	};
 
 	
-	this.fillTemplate = function (id, target, data) {
-		var tpl = _.template(id.html());
-		$(target).html(tpl(data));
+	this.fillTemplate = function (id, target, data, obj) {
+		return utils.getHTMLTemplate(id)
+		.then(function (template) {
+			var tpl = _.template(template);
+			$(target).html(tpl(data));
+			
+			utils.removeHTMLWhiteSpace(target);
+			if (obj)
+			{
+				var args = [target, _.flatten(obj.args)]
+				obj.fn.apply(this, args);
+			}
+		})
+		.fail(function () {
+			throw new Error("Unable to load static HTML template.");
+		})
 	};
 
 	
@@ -216,7 +237,7 @@ function TemplateView(serverData) {
 
 	this.setUpErrorPopup = function (e, data) {
 		
-		this.fillTemplate($("#error-popup-template"), $("#popup-wrapper"), data);
+		this.fillTemplate("popup-tpl", $("#popup-wrapper"), data);
 		$("#popup-wrapper").css("left", (e.clientX - $("#popup-wrapper").width() / 2) + "px");
 		$("#popup-wrapper").css("top", (e.clientY + 25) + "px");
 			
