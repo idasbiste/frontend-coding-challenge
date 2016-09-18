@@ -1,6 +1,5 @@
 DISCLAIMER
 
-- Put each template in a single HTML file and have a loader on utils.js
 - Models:
 	- Nugget
 	- Segment
@@ -10,9 +9,5 @@ DISCLAIMER
 	- Bootstrap (?)
 
 - Refactor:
-    - ReactJS to use the VirtualDOM and take care of changes
-	- Backbone to play with the template view
-
-- Settings JSON file:
-	- Timeout to input keypress
-	- Endpoints
+    .. ReactJS to use the VirtualDOM and take care of changes
+	.. Backbone to play with the views
