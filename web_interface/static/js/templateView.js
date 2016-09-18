@@ -10,6 +10,7 @@ function TemplateView(serverData) {
 	this.wrapperClickedClass = null;
 	this.wrapperHoveredClass = null;
 	this.spellingErrors = [];
+	this.word = null;
 
 	this.build = function () {
 
@@ -82,10 +83,17 @@ function TemplateView(serverData) {
 		});
 
 		$(".text-wrapper").on('click', ".word-error-wrapper", function (e) {
-
+			view.word = this;
 			view.setUpErrorPopup(e, _.find(view.spellingErrors, { error: $(this).html() }));
 			e.stopPropagation();
+		});
 
+		$("#popup-wrapper").on('click', "li", function () {
+			$(view.word).html($(this).html());
+			$(view.word).replaceWith($(view.word).text());
+			
+			$("." + view.wrapperClickedClass).removeClass("clicked");
+			view.cleanPopup();
 		});
 
 		$("#container").on('click', function () {
