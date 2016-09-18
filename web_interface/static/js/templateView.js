@@ -89,7 +89,10 @@ function TemplateView(serverData) {
 		});
 
 		$("#popup-wrapper").on('click', "li", function () {
-			$(view.word).html($(this).html());
+			if ($(this).text() !== 'Ignore')
+			{
+				$(view.word).html($(this).html());
+			}
 			$(view.word).replaceWith($(view.word).text());
 			
 			$("." + view.wrapperClickedClass).removeClass("clicked");
