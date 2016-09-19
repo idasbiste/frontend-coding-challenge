@@ -138,6 +138,7 @@ footer
     position: absolute;
     min-width: 200px;
     max-width: 280px;
+    z-index: 1;
 }
 
 #popup-wrapper .arrow-up

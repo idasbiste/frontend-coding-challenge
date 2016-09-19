@@ -4,6 +4,7 @@ function Utils() {
 	
 	var dataLayer = new DataLayer();
 
+	// Get configurations file
 	this.getConfig = function (location) {
 		return dataLayer.restGet(location);
 	};
@@ -15,12 +16,15 @@ function Utils() {
 	};
 
 
+	// Get HTML template from html files
 	this.getHTMLTemplate = function (id) {
 		return dataLayer.localGet("/static/html/" + id + ".html");
 	};
 
-	this.getNuggets = function (data) {
 
+	// Create nuggets array based on server information
+	// TODO: models could/should be created for the 'nugget' and 'segment' entities
+	this.getNuggets = function (data) {
 		var nuggets = [];
 
 		_.each(data, function (el) {
@@ -48,13 +52,11 @@ function Utils() {
 		});
 
 		return nuggets;
-
 	};
 
 
 	// Get text segments
 	this.getTextSegments = function (nuggets) {
-
 		var segments = [];
 
 		_.each(nuggets, function (nug) {
@@ -64,28 +66,18 @@ function Utils() {
 		});
 
 		return segments;
-
 	};
 
 
-	// Remove unnecessary whitespace from inline span elements
+	// Remove unnecessary whitespace between html elements
 	this.removeHTMLWhiteSpace = function (element) {
-
 		element.html(element.html().replace(/>\s+</g, "><").trim());
-
 	};
 
-
-	this.tagCleaner = function (tag, html, text) {
-
-		var innerText = html.match(new RegExp("<" + tag + ".*>(.*?)</" + tag + ">", "g"))[0];
-		return html.replace(innerText, text);
-
-	};
 
 	// Set the correct markup for the glossary items - uneditable content
+	// TODO: put this on templateView (?)
 	this.setGlossaryTerms = function (element, nuggets) {
-
 		_.each(nuggets, function (seg) {
 			_.each(seg.glossary, function (glossary) {
 				var content = element.html(),
@@ -99,20 +91,17 @@ function Utils() {
 
 	// Get initial text annotations by sendind a POST request
 	this.smartCheckData = function (data) {
-
-		return dataLayer.restPost("https://jobcheck.unbabel.com/analyze_job_segments", true, {
+		return dataLayer.restPost(CONFIGS['smartCheck-endpoint'], true, {
 			src_segments: data.simpleSource || this.getTextSegments(data.source),
 			trg_segments: data.simpleTarget || this.getTextSegments(data.target),
 			src_lang: data.src_lang,
 			trg_lang: data.trg_lang,
 			fast_analysis: true
 		});
-		
 	};
 
 	
-	// It delays the a callback function by ms
-	// Used to delay the keyup event to send the POST request and get issues information
+	// Function delayer
 	this.delayInput = (function () {
 		var timer = 0;
 		return function (callback, ms) {

@@ -1,9 +1,8 @@
-/* global Utils, $, _, CONFIGS */
+/* global utils, $, _, CONFIGS */
 
 function TemplateView(serverData) {
 	
-	var utils = new Utils(),
-		view = this;
+	var view = this;
 
 	this.lastClickedElement = null;
 	this.lastHoveredElement = null;
@@ -12,8 +11,8 @@ function TemplateView(serverData) {
 	this.spellingErrors = [];
 	this.word = null;
 
-	this.build = function () {
 
+	this.build = function () {
 		this.src = utils.getNuggets(serverData.source_segments),
 		this.trg = utils.getNuggets(serverData.target_segments);
 
@@ -25,7 +24,9 @@ function TemplateView(serverData) {
 			throw new Error("Different number of source and target segments");
 		}
 
-		$.when.apply($, [this.fillTemplate(lang_tpl, $("#source-lang"), { language: serverData.source_language, category: 'Original' }),
+		$.when.apply(
+			$, 
+			[this.fillTemplate(lang_tpl, $("#source-lang"), { language: serverData.source_language, category: 'Original' }),
 			this.fillTemplate(lang_tpl, $("#target-lang"), { language: serverData.target_language, category: 'Translation' }),
 			this.fillTemplate(text_tpl, $("#source-text .text-container"), { nuggets: this.src }),
 			this.fillTemplate(
@@ -51,7 +52,6 @@ function TemplateView(serverData) {
 			src_lang: serverData.source_language,
 			trg_lang: serverData.target_language
 		};
-
 	};
 
 	
@@ -64,28 +64,25 @@ function TemplateView(serverData) {
 			utils.removeHTMLWhiteSpace(target);
 			if (obj)
 			{
-				var args = [target, _.flatten(obj.args)]
+				var args = [target, _.flatten(obj.args)];
 				obj.fn.apply(this, args);
 			}
 		})
 		.fail(function () {
 			throw new Error("Unable to load static HTML template.");
-		})
+		});
 	};
 
 	
 	this.setEvents = function () {
-
 		this.setOnClickEvents();
 		this.setOnHoverEvents();
 		this.setMouseLeaveEvents();
 		this.setOnKeyUpEvents();
-
 	};
 
 	
 	this.setOnClickEvents = function () {
-
 		$(".text-wrapper", "#target-text").on('click', function (e) {
 			if (view.lastClickedElement && view.lastClickedElement != this) 
 			{
@@ -132,12 +129,10 @@ function TemplateView(serverData) {
 		$("body").on('click', function () {
 			view.cleanPopup();
 		});
-
 	};
 
 	
 	this.setOnHoverEvents = function () {
-
 		$(".text-wrapper", "#target-text").hover(function (e) {
 			if (view.lastHoveredElement && view.lastHoveredElement != this) 
 			{
@@ -154,12 +149,10 @@ function TemplateView(serverData) {
 
 			e.stopPropagation();
 		});
-
 	};
 
 	
 	this.setMouseLeaveEvents = function () {
-
 		$(".text-wrapper", "#target-text").mouseleave(function (e) {
 			if (view.wrapperHoveredClass)
 			{
@@ -173,24 +166,20 @@ function TemplateView(serverData) {
 
 			e.stopPropagation();
 		});
-
 	};
 
 	
 	this.setOnKeyUpEvents = function () {
-
 		$("p.text-wrapper").on('keyup', function () {
 			utils.delayInput(
 				(function () {
 					view.smartCheckRequest(this);
 				}).bind(this), CONFIGS["keyup-delay"]);
 		});
-
 	};
 
 
 	this.smartCheckRequest = function (element) {
-
 		// Remove every error
 		$(element).find(".word-error-wrapper").each(function () {
 			$(this).replaceWith($(this).text());
@@ -206,12 +195,10 @@ function TemplateView(serverData) {
 			view.showErrorUnderline(element, data);
 		})
 		.fail();
-
 	};
 
 	
 	this.showErrorUnderline = function (element, annotations) {
-
 		var issues = annotations.qa_description;
 
 		if (issues.sentence_issues['spelling']) 
@@ -230,27 +217,22 @@ function TemplateView(serverData) {
 			});
 		}
 		
-		// Continue if statements for more unknown types
-
+		// TODO: Continue if statements for more unknown types
 	};
 
 
 	this.setUpErrorPopup = function (e, data) {
-		
 		this.fillTemplate("popup-tpl", $("#popup-wrapper"), data);
 		$("#popup-wrapper").css("left", (e.clientX - $("#popup-wrapper").width() / 2) + "px");
-		$("#popup-wrapper").css("top", (e.clientY + 25) + "px");
-			
+		$("#popup-wrapper").css("top", (e.clientY + 25) + "px"); // the offset should be based on the element's line-height
 	};
 
 
 	this.cleanPopup = function () {
-		
 		if ($("#popup-wrapper").html() != "") 
 		{
 			$("#popup-wrapper").empty();
 		}
-		
 	};
 }
 
