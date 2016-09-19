@@ -11,7 +11,7 @@ function LoaderView() {
         .then(function (template) {
             view.template = _.template(template);
             $('body').prepend(view.template);  
-        })
+        });
     };
     
     this.stop = function () {
