@@ -1,0 +1,11 @@
+<div class="arrow-up"></div>
+<div class="error-type">
+	<p class="error-type-name"><%= category.name %></p>
+	<p class="error-type-description"><%= category.description %></p>
+</div>
+<ul class="category-suggestions">
+	<% _.each(suggestions, function (suggestion) { %>
+		<li><%= suggestion %></li>
+	<% }); %>
+	<li id="ignore-suggestion">Ignore</li>
+</ul>

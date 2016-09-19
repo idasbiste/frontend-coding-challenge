@@ -1,0 +1,5 @@
+<% _.each(nuggets, function (el) { %>
+	<% _.each(el.segments, function (segment) { %>
+		<p class="text-wrapper <%= segment.id %>" contenteditable="<%= el.isTarget ? true : false %>"><%= segment.text %></p>
+	<% }); %>
+<% }); %>

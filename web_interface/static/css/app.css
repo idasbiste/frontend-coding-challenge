@@ -1,0 +1,194 @@
+body, header, section, div, p, footer
+{
+	margin: 0;
+	border: 0;
+	font-family: 'PT Sans', sans-serif;
+	font-size: 100%;
+}
+
+body
+{
+	background-color: #e8ecef;
+}
+
+header
+{
+	background-color: #2b3e50;
+	width: 100%;
+	height: auto;
+	padding: 25px;
+}
+
+section {
+    width: 60%;
+    margin: 10% auto;
+    padding: 30px;
+    outline: 1px solid;
+    background: white;
+}
+
+p 
+{
+	-webkit-margin-before: 6px;
+	-webkit-margin-after: 6px;
+}
+
+footer
+{
+    width: 100%;
+    position: fixed;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    left: 0;
+    bottom: 0;
+    background-color: gray;
+}
+
+#loader-img
+{
+	position: absolute;
+	margin: auto;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+}
+
+.hidden
+{
+	display: none;
+}
+
+#source-text
+{
+	width: 50%;
+    float: left;
+}
+
+#target-text
+{
+	margin-left: 50%;
+}
+
+#source-text, #target-text
+{
+	background-color: white;
+}
+
+#source-lang, #target-lang
+{
+	display: inline-block;
+	margin-top: 5px;
+	margin-bottom: 10px;
+	
+	font-weight: bold;
+}
+
+#source-text .text-container
+{
+	opacity: 0.6;
+}
+
+.editable .text-wrapper:hover
+{
+	background-color: yellow;
+	opacity: 1;
+}
+
+.text-wrapper.clicked
+{
+	background-color: rgba(195, 144, 212, 0.6);
+}
+
+.text-wrapper.hovered
+{
+	background-color: cyan;
+	opacity: 0.5;
+}
+
+.glossary-term-wrapper
+{
+	background-color: rgba(150, 150, 150, 0.4);
+}
+
+.word-error-wrapper
+{
+	border-bottom: 1px red dashed;
+	cursor: pointer;
+}
+
+#submit
+{
+    float: right;
+    padding: 0 20px;
+    border-radius: 4px;
+    border: 0;
+    cursor: pointer;
+    font-size: 14px;
+    color: #fff;
+    line-height: 32px;
+    text-align: center;
+}
+
+/* Error-popup-wrapper */
+#popup-wrapper
+{
+	font-size: 80%;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    position: absolute;
+    min-width: 200px;
+    max-width: 280px;
+    z-index: 1;
+}
+
+#popup-wrapper .arrow-up
+{
+	width: 0;
+	height: 0;
+	position: absolute;
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-bottom: 10px solid #e8ecef;
+	top: -10px;
+    transform: translateX(-50%);
+    left: 50%;
+}
+
+.error-type 
+{
+    padding: 10px;
+    background-color: #e8ecef;
+    border-radius: 3px;
+}
+
+.error-type-name
+{
+	font-weight: bold;
+    font-size: 16px;
+}
+
+.error-type-descriptiopn
+{
+	font-size: 12px;
+}
+
+.category-suggestions
+{
+	margin: 0;
+	padding: 0;
+	color: #949496;
+	background-color: #f8f8f8;
+}
+
+.category-suggestions li 
+{
+	cursor: pointer;
+	list-style-type: none;
+	border-top: 1px solid #e8ecef;
+    padding: 5px 10px;
+}
+
+#ignore-suggestion
+{
+	color: blue;
+}

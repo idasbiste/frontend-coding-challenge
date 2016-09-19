@@ -1,0 +1,5 @@
+{
+    "keyup-delay": 800,
+    "mock-data-endpoint": "/static/mocks/task1.json",
+    "smartCheck-endpoint": "https://jobcheck.unbabel.com/analyze_job_segments"
+}
